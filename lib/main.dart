@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_little_wine_cellar/screen/home_screen.dart';
+import 'package:my_little_wine_cellar/screen/main_screen.dart';
 
 void main() {
   // db load
@@ -9,7 +9,7 @@ void main() {
       theme: ThemeData(
         fontFamily: 'NotoSans',
       ),
-      home: SafeArea(child: HomeScreen()),
+      home: SafeArea(child: MainScreen()),
     )
   );
 }
