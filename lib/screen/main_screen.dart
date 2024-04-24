@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_little_wine_cellar/component/add_wine_bottomsheet.dart';
+import 'package:my_little_wine_cellar/screen/add_screen.dart';
 import 'package:my_little_wine_cellar/screen/home_screen.dart';
 import 'package:my_little_wine_cellar/screen/list_screen.dart';
 import 'package:my_little_wine_cellar/screen/profile_screen.dart';
@@ -28,7 +30,6 @@ class _MainScreenState extends State<MainScreen>{
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      // no app bar
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: const Color(0xff971C23),
@@ -51,7 +52,11 @@ class _MainScreenState extends State<MainScreen>{
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          print('pressed btn.');
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const AddScreen()),
+          );
+          // _ShowAddWineDialog(context);
         },
         child: Icon(Icons.add),
         backgroundColor: Color(0xff971C23),
@@ -59,4 +64,47 @@ class _MainScreenState extends State<MainScreen>{
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
+}
+
+void _ShowAddWineDialog(BuildContext context){
+  showDialog(
+      context: context,
+      builder: (_) {
+        var emailController = TextEditingController();
+        var messageController = TextEditingController();
+        return AlertDialog(
+          title: Text('Contact Us'),
+          content: SingleChildScrollView(
+            child: Column(
+              children: [
+                TextFormField(
+                  controller: emailController,
+                  decoration: InputDecoration(hintText: 'Email'),
+                ),
+                TextFormField(
+                  controller: messageController,
+                  decoration: InputDecoration(hintText: 'Message'),
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                // Send them to your email maybe?
+                var email = emailController.text;
+                var message = messageController.text;
+                Navigator.pop(context);
+              },
+              child: Text(
+                'Add',
+                style: TextStyle(
+                  color: const Color(0xff971C23),
+                ),
+              ),
+            ),
+          ],
+        );
+      }
+  );
 }
